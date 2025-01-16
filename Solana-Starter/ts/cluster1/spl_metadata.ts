@@ -10,7 +10,7 @@ import { createSignerFromKeypair, signerIdentity, publicKey } from "@metaplex-fo
 import { bs58 } from "@coral-xyz/anchor/dist/cjs/utils/bytes";
 
 // Define our Mint address
-const mint = publicKey("<mint address>")
+const mint = publicKey("FMih8GuNiX1kYW5Ry9PsZKJ3S1pGrSRScP4q9522t7kx")
 
 // Create a UMI connection
 const umi = createUmi('https://api.devnet.solana.com');
@@ -21,28 +21,43 @@ umi.use(signerIdentity(createSignerFromKeypair(umi, keypair)));
 (async () => {
     try {
         // Start here
-        // let accounts: CreateMetadataAccountV3InstructionAccounts = {
-        //     ???
-        // }
+        let accounts: CreateMetadataAccountV3InstructionAccounts = {
+            mint,
+            mintAuthority: signer
+        }
 
-        // let data: DataV2Args = {
-        //     ???
-        // }
+        let data: DataV2Args = {
+            name: "Juiceee",
+            symbol: "JUS",
+            uri: "https://arweave.net/123456",
+            sellerFeeBasisPoints: 500,
+            creators: [
+                {
+                    address: keypair.publicKey,
+                    verified: true,
+                    share: 100
+                },
+            ],
+            collection: null,
+            uses: null
+        }
 
-        // let args: CreateMetadataAccountV3InstructionArgs = {
-        //     ???
-        // }
+        let args: CreateMetadataAccountV3InstructionArgs = {
+            data,
+            isMutable: false,
+            collectionDetails: null
+        }
 
-        // let tx = createMetadataAccountV3(
-        //     umi,
-        //     {
-        //         ...accounts,
-        //         ...args
-        //     }
-        // )
+        let tx = createMetadataAccountV3(
+            umi,
+            {
+                ...accounts,
+                ...args
+            }
+        )
 
-        // let result = await tx.sendAndConfirm(umi);
-        // console.log(bs58.encode(result.signature));
+        let result = await tx.sendAndConfirm(umi);
+        console.log("https://solscan.io/tx/" + bs58.encode(result.signature) + "?cluster=devnet");
     } catch(e) {
         console.error(`Oops, something went wrong: ${e}`)
     }
