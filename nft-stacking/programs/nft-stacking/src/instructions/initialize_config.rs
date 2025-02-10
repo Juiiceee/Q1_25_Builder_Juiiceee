@@ -7,7 +7,6 @@ use crate::state::StakeConfig;
 pub struct InitializeConfig<'info> {
     #[account(mut)]
     pub admin: Signer<'info>,
-
     #[account(
         init,
         payer = admin,
