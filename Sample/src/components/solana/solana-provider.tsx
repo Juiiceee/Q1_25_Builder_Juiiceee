@@ -13,6 +13,7 @@ export const WalletButton = dynamic(async () => (await import('@solana/wallet-ad
   ssr: false,
 })
 
+
 export function SolanaProvider({ children }: { children: ReactNode }) {
   const { cluster } = useCluster()
   const endpoint = useMemo(() => cluster.endpoint, [cluster])
