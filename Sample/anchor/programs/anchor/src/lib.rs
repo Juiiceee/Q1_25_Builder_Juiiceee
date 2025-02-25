@@ -1,16 +1,21 @@
 use anchor_lang::prelude::*;
 
-use crate::states::Style; // Import the Style enum
+mod instructions;
+mod states;
 
-pub mod states;
-pub mod instructions;
+use instructions::*;
+use states::*;
 
 declare_id!("9tERi2qiameCyampKo4a9wTohJmnfDJm6x8aApcsr8sF");
 
 #[program]
 mod hello_anchor {
     use super::*;
-    pub fn initialize_musician(ctx: Context<InitializeMusician>, name: String, style: Style) -> Result<()> {
-        
+    pub fn initialize_musician(
+        ctx: Context<InitializeMusician>,
+        name: String,
+        style: Style,
+    ) -> Result<()> {
+		ctx.accounts.initialize_musician(name, style)
     }
 }

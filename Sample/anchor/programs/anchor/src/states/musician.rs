@@ -1,8 +1,9 @@
+use crate::states::style::Style;
 use anchor_lang::prelude::*;
 
 #[account]
 pub struct Musician {
-    name: String,
-    style: Style,
-    music_amount: u32
+    pub name: String,
+    pub style: Style,
+    pub music_amount: u32,
 }

@@ -1,6 +1,6 @@
 use anchor_lang::prelude::*;
 
-use crate::states::Musician;
+use crate::states::{Musician, Style};
 
 #[derive(Accounts)]
 pub struct InitializeMusician<'info> {
@@ -12,5 +12,11 @@ pub struct InitializeMusician<'info> {
 }
 
 impl<'info> InitializeMusician<'info> {
-    
+    pub fn initialize_musician(&mut self, name: String, style: Style) -> Result<()> {
+        let musician = &mut self.musician;
+        musician.name = name;
+        musician.style = style;
+        musician.music_amount = 0;
+        Ok(())
+    }
 }

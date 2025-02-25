@@ -1,5 +1,2 @@
-pub mod musicianfun;
-pub use musicianfun::*;
-
-pub mod music;
-pub use music::*;
+pub mod initialize_musician;
+pub use initialize_musician::*;

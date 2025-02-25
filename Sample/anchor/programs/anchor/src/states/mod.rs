@@ -1,5 +1,5 @@
-pub mod style;
 pub mod musician;
+pub mod style;
 
-pub use style::*;
 pub use musician::*;
+pub use style::*;
