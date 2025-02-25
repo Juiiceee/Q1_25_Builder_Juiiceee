@@ -16,6 +16,6 @@ mod hello_anchor {
         name: String,
         style: Style,
     ) -> Result<()> {
-		ctx.accounts.initialize_musician(name, style)
+        ctx.accounts.initialize_musician(name, style)
     }
 }

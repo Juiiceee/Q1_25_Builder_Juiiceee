@@ -3,8 +3,9 @@ use anchor_lang::prelude::*;
 use crate::states::{Musician, Style};
 
 #[derive(Accounts)]
+#[instruction(name: String)]
 pub struct InitializeMusician<'info> {
-    #[account(init, payer = signer, seeds = [b"musician", signer.key().as_ref()], bump, space = 8 + 8)]
+    #[account(init, payer = signer, seeds = [b"musician", name.as_bytes(), signer.key().as_ref()], bump, space = 8 + 8)]
     pub musician: Account<'info, Musician>,
     #[account(mut)]
     pub signer: Signer<'info>,
