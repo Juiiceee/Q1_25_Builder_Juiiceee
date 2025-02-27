@@ -18,4 +18,17 @@ mod hello_anchor {
     ) -> Result<()> {
         ctx.accounts.initialize_musician(name, style)
     }
+
+    pub fn add_music(
+        ctx: Context<AddMusic>,
+        name: String,
+        artist: Pubkey,
+        style: Style,
+        price: u64,
+        url_cover: String,
+        url_song: String,
+    ) -> Result<()> {
+        ctx.accounts
+            .add_music(name, artist, style, price, url_cover, url_song)
+    }
 }
