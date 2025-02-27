@@ -16,6 +16,8 @@
 # production
 /build
 
+test-ledger
+
 # misc
 .DS_Store
 *.pem
