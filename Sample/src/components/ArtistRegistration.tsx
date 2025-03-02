@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import Input from "./Input";
 import Button from "./Button";
 import { useAnchorWallet, useConnection } from "@solana/wallet-adapter-react";
-import { initMusic } from "./Operation";
+import { initMusician } from "./Operation";
 
 export default function ArtistRegistration() {
 	const [name, setName] = useState("");
@@ -39,7 +39,7 @@ export default function ArtistRegistration() {
 						<option value="jazz">Jazz</option>
 					</select>
 				</div>
-				<Button onClick={async () => await initMusic(name, type, wallet, connection)} disabled={!isFilled}>Enregistrer</Button>
+				<Button onClick={async () => await initMusician(name, type, wallet, connection)} disabled={!isFilled}>Enregistrer</Button>
 			</div>
 		</div>
 	);

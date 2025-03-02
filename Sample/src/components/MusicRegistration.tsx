@@ -4,6 +4,8 @@ import React, { useState } from "react";
 import { toast } from "react-hot-toast";
 import Input from "./Input";
 import Button from "./Button";
+import { useAnchorWallet, useConnection } from "@solana/wallet-adapter-react";
+import { initMusic } from "./Operation";
 
 export default function MusicRegistration() {
 	const wallet = useAnchorWallet();
@@ -77,7 +79,7 @@ export default function MusicRegistration() {
 						onChange={(e) => setUrlCover(e.target.value)}
 					/>
 				</div>
-				<Button disabled={!isFormValid()}>Register</Button>
+				<Button disabled={!isFormValid()} onClick={async () => await initMusic(name, style, price, urlSong, urlCover, wallet, connection)}>Register</Button>
 			</div>
 		</div>
 	);
