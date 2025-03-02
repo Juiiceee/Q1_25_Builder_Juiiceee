@@ -1,9 +1,9 @@
-import ArtistRegistration from "@/components/ArtistRegistrationForm";
+import ArtistRegistration from "@/components/ArtistRegistration";
 
 const RegisterArtistPage = () => {
-  return (
-        <ArtistRegistration />
-  );
+	return (
+		<ArtistRegistration />
+	);
 };
 
 export default RegisterArtistPage;

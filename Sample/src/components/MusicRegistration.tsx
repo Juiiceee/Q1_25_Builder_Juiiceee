@@ -1,25 +1,13 @@
 "use client";
 
 import React, { useState } from "react";
-import { useForm, SubmitHandler } from "react-hook-form";
 import { toast } from "react-hot-toast";
-import { useRouter } from "next/navigation";
 import Input from "./Input";
 import Button from "./Button";
 
-interface MusicRegistrationFormProps { }
-
-interface FormValues {
-	name: string;
-	symbol: string;
-	price: number;
-	priceUnit: string;
-	uri: string;
-	song: FileList | undefined;
-	image: FileList | undefined;
-}
-
-const MusicRegistrationForm: React.FC<MusicRegistrationFormProps> = () => {
+export default function MusicRegistration() {
+	const wallet = useAnchorWallet();
+	const { connection } = useConnection();
 	const [name, setName] = useState("");
 	const [style, setStyle] = useState("");
 	const [price, setPrice] = useState(0);
@@ -94,5 +82,3 @@ const MusicRegistrationForm: React.FC<MusicRegistrationFormProps> = () => {
 		</div>
 	);
 };
-
-export default MusicRegistrationForm;

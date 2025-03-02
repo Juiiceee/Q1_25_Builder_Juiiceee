@@ -1,9 +1,9 @@
-import MusicRegistrationForm from "@/components/MusicRegistrationForm";
+import MusicRegistration from "@/components/MusicRegistration";
 
 const RegisterMusicPage = () => {
-  return (
-        <MusicRegistrationForm />
-  );
+	return (
+		<MusicRegistration />
+	);
 };
 
 export default RegisterMusicPage;
