@@ -12,3 +12,7 @@ export function getStyleName(styleObject: any): string {
   // Première lettre en majuscule
   return styleName.charAt(0).toUpperCase() + styleName.slice(1);
 }
+
+export function getTxTron(tx:string){
+	return tx.slice(0, 6) + '...' + tx.slice(-6);
+}

@@ -1,16 +1,10 @@
 "use client";
 
 import React, { useState } from "react";
-import { useForm, SubmitHandler } from "react-hook-form";
-import { toast } from "react-hot-toast";
-import { useRouter } from "next/navigation";
 import Input from "./Input";
 import Button from "./Button";
-import { Program, AnchorProvider, setProvider } from "@coral-xyz/anchor";
-import { PublicKey, SystemProgram } from "@solana/web3.js";
 import { useAnchorWallet, useConnection } from "@solana/wallet-adapter-react";
-import idl from "@/../anchor/target/idl/hello_anchor.json";
-import { HelloAnchor as anchorProgram } from "@/../anchor/target/types/hello_anchor";
+import { initMusic } from "./Operation";
 
 interface FormValues {
 	isArtist: boolean;
@@ -19,45 +13,11 @@ interface FormValues {
 }
 
 export const ArtistRegistrationForm: React.FC<ArtistRegistrationFormProps> = () => {
-	const wallet = useAnchorWallet();
-	const { connection } = useConnection();
 	const [name, setName] = useState("");
 	const [type, setType] = useState("");
-
+	const wallet = useAnchorWallet();
+	const { connection } = useConnection();
 	const isFilled = name !== "" && type !== "";
-	if (!wallet) return null;
-
-	const provider = new AnchorProvider(connection, wallet, {
-		commitment: "confirmed",
-	});
-
-	setProvider(provider);
-
-	const program = new Program(idl as anchorProgram, provider);
-
-	const [musicianPda] = PublicKey.findProgramAddressSync(
-		[Buffer.from("musician"), Buffer.from(name), wallet.publicKey.toBuffer()],
-		program.programId
-	);
-
-	const initMusic = async () => {
-		try {
-			const transaction = await program.methods
-				.initializeMusician(name, { [type]: {} })
-				.accountsStrict({
-					musician: musicianPda,
-					signer: wallet.publicKey,
-					systemProgram: SystemProgram.programId,
-				})
-				.rpc();
-			console.log(`Transaction signature: ${transaction}`);
-			toast.success(`Transaction successful: ${transaction}`);
-		}
-		catch (error) {
-			console.error(`Transaction failed: ${error}`);
-			toast.error(`Transaction failed: ${error}`);
-		}
-	}
 
 	return (
 		<div className="p-4 max-w-md mx-auto bg-neutral-900 rounded-md">
@@ -85,7 +45,7 @@ export const ArtistRegistrationForm: React.FC<ArtistRegistrationFormProps> = () 
 						<option value="jazz">Jazz</option>
 					</select>
 				</div>
-				<Button onClick={initMusic} disabled={!isFilled}>Enregistrer</Button>
+				<Button onClick={async () => await initMusic(name, type, wallet, connection)} disabled={!isFilled}>Enregistrer</Button>
 			</div>
 		</div>
 	);
