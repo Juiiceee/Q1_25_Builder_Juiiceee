@@ -28,8 +28,14 @@ export default async function RootLayout({ children }: LayoutProps) {
 						<SolanaProvider>
 							<ToasterProvider />
 							<Sidebar songs={userSongs}>
-								<WalletButton />
-								{children}
+								<div className="bg-neutral-900 rounded-lg w-full h-full overflow-hidden overflow-y-auto">
+									<div className="relative flex-1 bg-neutral-900 p-4 overflow-y-auto">
+										<div className="absolute top-4 right-4 z-10">
+											<WalletButton />
+										</div>
+										{children}
+									</div>
+								</div>
 							</Sidebar>
 							<Player />
 						</SolanaProvider>
