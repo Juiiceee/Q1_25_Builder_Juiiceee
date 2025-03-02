@@ -73,15 +73,14 @@ export const ArtistRegistrationForm: React.FC<ArtistRegistrationFormProps> = () 
 						className="form-select w-full mt-1 p-2 rounded-md bg-neutral-700 text-white"
 						onChange={(e) => setType(e.target.value)}
 					>
-						<option value="Rock">Rock</option>
-						<option value="Rap">Rap</option>
-						<option value="Classique">Classique</option>
-						<option value="Electro">Electro</option>
-						<option value="Jazz">Jazz</option>
+						<option value="rock">Rock</option>
+						<option value="rap">Rap</option>
+						<option value="classique">Classique</option>
+						<option value="electro">Electro</option>
+						<option value="jazz">Jazz</option>
 					</select>
 				</div>
 				<Button onClick={initMusic} disabled={!isFilled}>Enregistrer</Button>
-				<Button onClick={View}>Voir</Button>
 			</div>
 		</div>
 	);
