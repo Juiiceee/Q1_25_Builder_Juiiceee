@@ -48,6 +48,12 @@ const Sidebar: React.FC<SidebarProps> = ({ children, songs }) => {
         active: pathname === '/register-music',
         href: '/register-music',
       },
+	  {
+        icon: FaMusic,
+        label: 'View Artists',
+        active: pathname === '/view-artist',
+        href: '/view-artist',
+      },
       // eslint-disable-next-line react-hooks/exhaustive-deps
     ],
     [pathname], 
