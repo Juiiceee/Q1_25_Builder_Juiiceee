@@ -25,15 +25,14 @@ export const ArtistRegistrationForm: React.FC<ArtistRegistrationFormProps> = () 
 	const [type, setType] = useState("");
 
 	const isFilled = name !== "" && type !== "";
-
-	const test = () => {
-		console.log("test");
-	}
 	if (!wallet) return null;
+
 	const provider = new AnchorProvider(connection, wallet, {
 		commitment: "confirmed",
 	});
+
 	setProvider(provider);
+
 	const program = new Program(idl as anchorProgram, provider);
 
 	const [musicianPda] = PublicKey.findProgramAddressSync(
@@ -42,16 +41,22 @@ export const ArtistRegistrationForm: React.FC<ArtistRegistrationFormProps> = () 
 	);
 
 	const initMusic = async () => {
-		const transaction = await program.methods
-			.initializeMusician(name, { [type]: {}})
-			.accountsStrict({
-				musician: musicianPda,
-				signer: wallet.publicKey,
-				systemProgram: SystemProgram.programId,
-			})
-			.rpc();
-		console.log(`Transaction signature: ${transaction}`);
-
+		try {
+			const transaction = await program.methods
+				.initializeMusician(name, { [type]: {} })
+				.accountsStrict({
+					musician: musicianPda,
+					signer: wallet.publicKey,
+					systemProgram: SystemProgram.programId,
+				})
+				.rpc();
+			console.log(`Transaction signature: ${transaction}`);
+			toast.success(`Transaction successful: ${transaction}`);
+		}
+		catch (error) {
+			console.error(`Transaction failed: ${error}`);
+			toast.error(`Transaction failed: ${error}`);
+		}
 	}
 
 	return (

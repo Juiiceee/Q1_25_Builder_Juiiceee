@@ -6,10 +6,6 @@ import { toast } from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import Input from "./Input";
 import Button from "./Button";
-import { supabaseClient } from "@/utils/supabaseClient";
-import { Song } from "@/types";
-import { uploadFiles } from "@/utils/lighthouseClient";
-import { useUser } from "@/hooks/useUser";
 
 interface MusicRegistrationFormProps { }
 
