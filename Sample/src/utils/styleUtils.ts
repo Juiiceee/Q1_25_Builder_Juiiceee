@@ -16,3 +16,7 @@ export function getStyleName(styleObject: any): string {
 export function getTxTron(tx:string){
 	return tx.slice(0, 6) + '...' + tx.slice(-6);
 }
+
+export function filterByArtistKey(array: any[], publicKey: string) {
+  return array.filter(item => item.account.artist.toString() === publicKey);
+}

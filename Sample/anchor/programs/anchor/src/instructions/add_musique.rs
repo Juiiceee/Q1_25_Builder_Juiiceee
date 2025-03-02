@@ -18,7 +18,6 @@ impl<'info> AddMusic<'info> {
     pub fn add_music(
         &mut self,
         name: String,
-        artist: Pubkey,
         style: Style,
         price: u64,
         url_cover: String,
@@ -27,7 +26,7 @@ impl<'info> AddMusic<'info> {
         let music = &mut self.music;
         let musician = &mut self.musician;
         music.name = name;
-        music.artist = artist;
+        music.artist = musician.key();
         music.style = style;
         music.price = price;
         music.url_cover = url_cover;

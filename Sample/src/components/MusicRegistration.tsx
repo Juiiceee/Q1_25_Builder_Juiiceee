@@ -6,6 +6,11 @@ import Input from "./Input";
 import Button from "./Button";
 import { useAnchorWallet, useConnection } from "@solana/wallet-adapter-react";
 import { initMusic } from "./Operation";
+import idl from "@/../anchor/target/idl/hello_anchor.json";
+import { HelloAnchor as anchorProgram } from "@/../anchor/target/types/hello_anchor";
+import { AnchorProvider, Program, setProvider } from "@coral-xyz/anchor";
+import { filterByArtistKey} from "@/utils/styleUtils";
+import { PublicKey } from "@solana/web3.js";
 
 export default function MusicRegistration() {
 	const wallet = useAnchorWallet();
@@ -15,6 +20,13 @@ export default function MusicRegistration() {
 	const [price, setPrice] = useState(0);
 	const [urlCover, setUrlCover] = useState("");
 	const [urlSong, setUrlSong] = useState("");
+	if (!wallet) return;
+
+	const provider = new AnchorProvider(connection, wallet, {
+			commitment: "confirmed",
+	});
+	setProvider(provider);
+	const program = new Program(idl as anchorProgram, provider);
 
 	const isFormValid = () => {
 		return !!(
@@ -25,6 +37,20 @@ export default function MusicRegistration() {
 			urlSong
 		);
 	};
+
+	const print = async () => {
+		try {
+			const [musicianPda] = PublicKey.findProgramAddressSync(
+				[Buffer.from("musician"), wallet.publicKey.toBuffer()],
+				program.programId
+			);
+			const musicianData = await program.account.music.all();
+			const filter = filterByArtistKey(musicianData, musicianPda.toString());
+			console.log(filter.forEach((item) => console.log(item.account.name)));
+		} catch (error) {
+			console.error("Error fetching musicians:", error);
+		}
+	}
 
 	return (
 		<div className="p-4 max-w-md mx-auto bg-neutral-900 rounded-md">
@@ -79,7 +105,8 @@ export default function MusicRegistration() {
 						onChange={(e) => setUrlCover(e.target.value)}
 					/>
 				</div>
-				<Button disabled={!isFormValid()} onClick={async () => await initMusic(name, style, price, urlSong, urlCover, wallet, connection)}>Register</Button>
+				<Button disabled={!isFormValid()} onClick={async () => await initMusic(name, style, price, urlCover, urlSong, wallet, connection)}>Register</Button>
+				<button onClick={print}>print</button>
 			</div>
 		</div>
 	);

@@ -72,13 +72,12 @@ export const initMusic = async (name: string, style: string, price: number, urlC
 		const tx = await program.methods
 			.addMusic(
 				name,
-				wallet.publicKey,
 				{ [style]: {} }, // Style enum corrigé
 				new BN(price), // price in lamports
 				urlCover,
 				urlSong
 			)
-			.accountsStrict({
+			.accounts({
 				music: musicPda,
 				musician: musicianPda,
 				signer: wallet.publicKey,

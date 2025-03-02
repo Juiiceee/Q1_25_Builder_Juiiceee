@@ -1,0 +1,16 @@
+{
+	"name": "Summertime Sadness",
+	"description": "This is an NFT for prouve you have the right to use this music",
+	"image": "https://m.media-amazon.com/images/I/71mZygfJ9-L.jpg",
+	"external_url": "https://www.youtube.com/watch?v=TdrL3QxjyVw&pp=ygUSc3VtbWVydGltZSBzYWRuZXNz",
+	"attributes": [
+	  {
+		"trait_type": "Price",
+		"value": 0.1
+	  },
+	  {
+		"trait_type": "Style",
+		"value": "pop"
+	  }
+	]
+}
