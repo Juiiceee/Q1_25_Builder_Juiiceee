@@ -1,8 +1,8 @@
-import ArtistRegistrationForm from "@/components/ArtistRegistrationForm";
+import ArtistRegistration from "@/components/ArtistRegistrationForm";
 
 const RegisterArtistPage = () => {
   return (
-        <ArtistRegistrationForm />
+        <ArtistRegistration />
   );
 };
 

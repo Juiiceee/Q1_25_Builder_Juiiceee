@@ -6,13 +6,7 @@ import Button from "./Button";
 import { useAnchorWallet, useConnection } from "@solana/wallet-adapter-react";
 import { initMusic } from "./Operation";
 
-interface FormValues {
-	isArtist: boolean;
-	mainName: string;
-	mainType: string;
-}
-
-export const ArtistRegistrationForm: React.FC<ArtistRegistrationFormProps> = () => {
+export default function ArtistRegistration() {
 	const [name, setName] = useState("");
 	const [type, setType] = useState("");
 	const wallet = useAnchorWallet();
@@ -50,5 +44,3 @@ export const ArtistRegistrationForm: React.FC<ArtistRegistrationFormProps> = () 
 		</div>
 	);
 };
-
-export default ArtistRegistrationForm;
