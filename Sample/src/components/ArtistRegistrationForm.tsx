@@ -10,7 +10,7 @@ import { Program, AnchorProvider, setProvider } from "@coral-xyz/anchor";
 import { PublicKey, SystemProgram } from "@solana/web3.js";
 import { useAnchorWallet, useConnection } from "@solana/wallet-adapter-react";
 import idl from "@/../anchor/target/idl/hello_anchor.json";
-import { hello_anchor as anchorProgram } from "@/../anchor/target/types/hello_anchor";
+import { HelloAnchor as anchorProgram } from "@/../anchor/target/types/hello_anchor";
 
 interface FormValues {
 	isArtist: boolean;
